@@ -1,8 +1,4 @@
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.util.Scanner;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -23,13 +19,8 @@ public class World {
     public void startWorld(){
         new ConnectWindow().setVisible(true);
         while(true) {
-            System.out.println("Waiting...");
-            // ждем клиента из сети
-
             try {
                 Socket socket = serverSocket.accept();
-                System.out.println("Client connected!");
-                // создаем клиента на своей стороне
                 String name = Client.getName();
                 new Client(socket, this, name);
 
@@ -42,8 +33,11 @@ public class World {
 
     public static void main(String[] args) {
         new World().startWorld();
-        System.out.println(Fighting.getMonstersCount());
     }
+    /*public static void restart() {
+        String[] args = new String[0];
+        main(args);
+    }*/
 
     public static void writeMsg(String msg) {
         //Client.writeMsg(msg);

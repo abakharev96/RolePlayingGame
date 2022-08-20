@@ -1,4 +1,4 @@
-public abstract class Characteristics implements Actions {
+public abstract class Characteristics {
     private String name;
     private int health;
     private int gold;
@@ -72,6 +72,11 @@ public abstract class Characteristics implements Actions {
     public void setMana(int mana) {
         this.mana = mana;
     }
+
+    /*public int attack(Monsters) {
+        if (dexterity * 3 > Fighting.getRandInt(1, 100)) return strength;
+        else return  0;
+    }*/
 
 }
 

@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.lang.constant.Constable;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -21,11 +22,12 @@ class Client implements Runnable {
         return name;
     }
 
-    Scanner in;
+    static Scanner in;
     static PrintStream out;
 
     public void run() {
         try {
+            Gamer gamer = new Gamer(Client.getName(), 150, 0, 30, 0, 25, 100);
             // получаем потоки ввода и вывода
             InputStream is = socket.getInputStream();
             OutputStream os = socket.getOutputStream();
@@ -41,6 +43,9 @@ class Client implements Runnable {
             setName(name);
             out.println("Ok, " + name + ", its time to game! If you are ready, press Enter.");
             String input = in.nextLine();
+            writeMsg("Your health is " + gamer.getHealth() + "! \n" +
+                    "but enemies do not sleep...");
+
 
             while (!input.equals("3")) {
                 World.writeMsg(input);
@@ -49,10 +54,12 @@ class Client implements Runnable {
                 switch (input) {
                     case "1": {
                         Merchant merchant = new Merchant();
-                        merchant.tradeGoods();
+                        merchant.tradeGoods(gamer);
                     } break;
                     case "2": {
-                        Fighting fighting = new Fighting();
+                        Fighting fight = new Fighting();
+                        fight.startFighting(gamer);
+
                     } break;
                     default: {
                         writeMsg("Input is incorrect. You can choose between 1, 2 or 3. Please, try again");
@@ -68,6 +75,12 @@ class Client implements Runnable {
 
     private void setName(String name) {
         this.name = name;
+    }
+
+    public static Constable receiveInput() {
+        String gamerInput;
+        gamerInput = in.nextLine();
+        return gamerInput;
     }
 
     public static void writeMsg(String msg){

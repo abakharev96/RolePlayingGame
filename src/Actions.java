@@ -1,5 +1,5 @@
 public interface Actions {
-    void fight();
-
+    void attack(Characteristics monster);
+    void defence(Characteristics monster);
 }
 

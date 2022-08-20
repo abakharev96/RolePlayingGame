@@ -51,6 +51,7 @@ public class ConnectWindow extends JFrame implements KeyListener {
             textArea.setForeground(Color.RED);
             textArea.append("Server " + serverIP + " port " + serverPort + " " + "" + "NOT AVAILABLE");
             e.printStackTrace();
+
         }
         new Thread() {
             // в отдельном потоке
